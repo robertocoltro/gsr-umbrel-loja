@@ -1,13 +1,7 @@
-# O APLICATIVO QUE MANTÉM O BACKUP DE PÉ NO SERVIDOR DE CASA.
+# ⚠️ ARQUIVO PÚBLICO — curto de propósito. O porquê está no repositório privado do projeto.
 #
-# ⚠️ ELE NÃO CARREGA O BACKUP DENTRO DE SI. Os programas do backup continuam morando em
-# `/home/umbrel/gsr-backup` (junto com o `.backup.env`, que tem as chaves e NUNCA entra aqui —
-# esta pasta vira um repositório PÚBLICO). O aplicativo só monta aquela pasta e roda o
-# agendador que já existe. Trocar um programa do backup = copiar o arquivo para lá; não mexe
-# nesta loja nem exige reinstalar nada.
-#
-# ⚠️ A VERSÃO ABAIXO É O QUE O UMBREL COMPARA para oferecer "atualizar". Mexeu no
-# `docker-compose.yml` desta pasta → suba a versão, senão o servidor continua com a antiga.
+# ⚠️ Mexeu no `docker-compose.yml`? Suba a `version` — o Umbrel só oferece atualizar quando o
+# número muda.
 manifestVersion: 1.1
 id: gsr-backup
 name: Backup GSR
@@ -16,8 +10,8 @@ category: files
 version: "1.0.0"
 port: 8099
 description: >-
-  Faz o backup diário do Next Step (GSR) às 03:00 de Brasília, cifrado, e entrega
-  a cópia ao Nextcloud.
+  Faz o backup diário do Next Step (GSR), cifrado, e o entrega para fora desta
+  máquina.
 
 
   Abrir este aplicativo mostra o estado do último backup: quando rodou, se deu
@@ -27,8 +21,7 @@ description: >-
 
   Se o agendador estiver parado, a página diz isso em vermelho.
 releaseNotes: >-
-  Primeira versão. Substitui o container solto e o serviço do sistema, que não
-  sobreviviam a reiniciar a máquina.
+  Primeira versão.
 developer: GSR — Global Supply Recruitment
 website: https://www.gsrecruitment.com.br
 submitter: GSR

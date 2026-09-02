@@ -1,18 +1,7 @@
-# ⚠️⚠️ DOIS SERVIÇOS SEPARADOS DE PROPÓSITO: quem trabalha e quem mostra.
-# Se a página de estado quebrar, o backup continua rodando — e é o backup que importa. Juntar
-# os dois no mesmo container faria uma falha da página derrubar o backup junto.
-#
-# ⚠️ O `user: "1000:1000"` é o usuário `umbrel` da máquina. Sem ele, os arquivos do backup
-# nascem de dono `root` e o Roberto não consegue mexer neles depois.
-#
-# ⚠️ A PASTA VEM DE FORA (`/home/umbrel/gsr-backup`) e não da área do aplicativo: é lá que já
-# moram os programas, o `.backup.env` com as chaves e as cópias já feitas. Desinstalar este
-# aplicativo NÃO apaga nada disso.
+# ⚠️ ARQUIVO PÚBLICO — curto de propósito. O porquê está no repositório privado do projeto.
 version: "3.7"
 
 services:
-  # O app_proxy é o porteiro do Umbrel: é ele que pede o login da casa antes de deixar alguém
-  # ver a página de estado. Sem esta parte, o aplicativo instala mas o quadradinho não abre.
   app_proxy:
     environment:
       APP_HOST: gsr-backup_estado_1
@@ -34,7 +23,7 @@ services:
     restart: unless-stopped
     mem_limit: 128m
     volumes:
-      # ⚠️ Só de leitura: a página MOSTRA o estado, não mexe em backup nenhum.
+      # Só de leitura: a página mostra o estado, não mexe em nada.
       - /home/umbrel/gsr-backup:/app:ro
     working_dir: /app
     command: node scripts/umbrel/pagina-de-estado.mjs
