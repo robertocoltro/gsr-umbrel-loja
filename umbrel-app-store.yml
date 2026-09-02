@@ -1,0 +1,37 @@
+# A LOJA DA GSR — é isto que faz o agendador do backup sobreviver a reiniciar o servidor.
+#
+# ⚠️⚠️ POR QUE UMA LOJA, E NÃO UM CONTAINER SOLTO NEM UM SERVIÇO DO SISTEMA
+# O umbrelOS se atualiza TROCANDO A PARTIÇÃO DO SISTEMA inteira e usa raiz efêmera: tudo o que
+# é escrito fora da partição de dados é descartado a cada boot. Medido em 2026-09-02, com dois
+# reinícios de verdade: o container solto foi REMOVIDO e o serviço do systemd em /etc SUMIU,
+# sem uma linha no registro do boot. Ver `scripts/umbrel/gsr-backup.service`, que ficou guardado
+# só como registro do que NÃO funciona.
+#
+# O único mecanismo daquela máquina que sobrevive às duas coisas é o de APLICATIVO: o umbreld
+# sobe os aplicativos instalados a cada boot, e a área deles (`~/umbrel`) fica na partição de
+# dados. Um aplicativo precisa vir de uma loja — e é o que este arquivo declara.
+#
+# ⚠️ O ID DO APLICATIVO PRECISA COMEÇAR COM O ID DA LOJA (regra do umbrelOS para loja da
+# comunidade). Loja `gsr` → aplicativo `gsr-backup`. Mudar um obriga a mudar o outro.
+#
+# ─────────────────────────────────────────────────────────────────────────────────────────────
+# COMO ISTO CHEGA AO SERVIDOR
+#
+# O umbrelOS só aceita loja da comunidade que venha de um endereço git. Esta pasta é o conteúdo
+# de um repositório PÚBLICO separado — nunca o repositório do projeto, que é privado e tem o app
+# inteiro dentro. O que fica público aqui é só a receita de subir dois containers: nenhuma
+# chave, nenhum dado, nenhum programa do backup.
+#
+#   1. Publicar o CONTEÚDO desta pasta na raiz de um repositório público
+#      (o `umbrel-app-store.yml` e a pasta `gsr-backup/`).
+#   2. No painel do Umbrel: App Store → "..." (canto superior) → Community App Stores →
+#      colar o endereço do repositório.
+#   3. A loja "GSR" aparece; instalar "Backup GSR".
+#
+# ⚠️ Mudou algo no `docker-compose.yml`? Suba a `version` do `umbrel-app.yml` e publique de
+# novo — o Umbrel só oferece "atualizar" quando o número muda.
+#
+# ⚠️ ANTES DE INSTALAR, a pasta `/home/umbrel/gsr-backup` já tem de existir na máquina, com os
+# programas e o `.backup.env`. O aplicativo não traz nada disso — ele só liga o que já está lá.
+id: gsr
+name: GSR
