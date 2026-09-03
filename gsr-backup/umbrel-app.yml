@@ -7,7 +7,7 @@ id: gsr-backup
 name: Backup GSR
 tagline: O backup diário do Next Step, cifrado
 category: files
-version: "1.0.0"
+version: "1.1.0"
 port: 8099
 description: >-
   Faz o backup diário do Next Step (GSR), cifrado, e o entrega para fora desta
@@ -21,7 +21,12 @@ description: >-
 
   Se o agendador estiver parado, a página diz isso em vermelho.
 releaseNotes: >-
-  Primeira versão.
+  O backup agora sai desta máquina sozinho, sem depender de nenhum computador
+  estar ligado.
+
+
+  A página do aplicativo passa a dizer se a cópia SAIU daqui — antes ela só
+  dizia que o backup tinha sido feito.
 developer: GSR — Global Supply Recruitment
 website: https://www.gsrecruitment.com.br
 submitter: GSR
